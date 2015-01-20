@@ -1,5 +1,5 @@
-require "crosstest/core/version"
-require "logger"
+require 'crosstest/core/version'
+require 'logger'
 
 module Crosstest
   module Core

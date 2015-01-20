@@ -4,7 +4,7 @@ module Crosstest
   module Core
     module Logger
       def logger
-         @logger ||= new_logger
+        @logger ||= new_logger
       end
 
       def new_logger(_io = $stdout, _level = :debug)
