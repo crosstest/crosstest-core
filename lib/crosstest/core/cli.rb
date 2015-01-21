@@ -4,8 +4,6 @@ require 'thor'
 module Crosstest
   module Core
     class CLI < Thor
-      BUILT_IN_TASKS = %w(bootstrap)
-
       class << self
         # Override Thor's start to strip extra_args from ARGV before it's processed
         attr_accessor :extra_args

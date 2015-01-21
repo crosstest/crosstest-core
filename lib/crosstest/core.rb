@@ -1,5 +1,8 @@
 require 'crosstest/core/version'
 require 'logger'
+require 'cause'
+require 'thor'
+require 'pathname'
 
 module Crosstest
   module Core
@@ -12,5 +15,7 @@ module Crosstest
     autoload :StdoutLogger, 'crosstest/core/logging'
     autoload :LogdevLogger, 'crosstest/core/logging'
     autoload :Color, 'crosstest/core/color'
+    autoload :Dash, 'crosstest/core/hashie'
+    autoload :Mash, 'crosstest/core/hashie'
   end
 end
