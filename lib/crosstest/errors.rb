@@ -127,25 +127,8 @@ module Crosstest
   # action.
   class ActionFailed < TransientFailure; end
 
-  # FIXME: Move to skeptic
-  module Skeptic
-    # Exception class capturing what caused an scenario to die.
-    class ScenarioFailure < TransientFailure; end
-  end
-
-  # Exception class capturing what caused a validation to fail.
-  class ValidationFailure < TransientFailure
-    include ErrorSource
-  end
-
   class ExecutionError < TransientFailure
     attr_accessor :execution_result
-  end
-
-  class FeatureNotImplementedError < StandardError
-    def initialize(feature)
-      super "Feature #{feature} is not implemented"
-    end
   end
 
   class << self
