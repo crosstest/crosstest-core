@@ -7,8 +7,10 @@ module Crosstest
         @logger ||= new_logger
       end
 
-      def new_logger(_io = $stdout, _level = :debug)
-        ::Logger.new(STDOUT)
+      def new_logger(io = $stdout, level = :debug)
+        StdoutLogger.new(io).tap do | logger |
+          logger.level = Util.to_logger_level(level)
+        end
       end
 
       def log_level=(level)

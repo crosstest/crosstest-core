@@ -3,7 +3,15 @@ module Crosstest
     module DefaultLogger
       module ClassMethods
         def logger
-          @logger ||= Crosstest.configuration.default_logger
+          @logger ||= default_logger
+        end
+
+        def default_logger
+          if Crosstest.respond_to? :configuration
+            Crosstest.configuration.default_logger
+          else
+            ::Logger.new(STDOUT)
+          end
         end
       end
 
