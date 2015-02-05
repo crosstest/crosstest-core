@@ -1,4 +1,5 @@
 require 'hashie'
+require 'erb'
 
 module Crosstest
   module Core

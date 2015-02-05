@@ -28,6 +28,9 @@ module Crosstest
     # @return [Logger] the common Crosstest logger
     attr_accessor :logger
 
+    # @return [Mutex] a common mutex for global coordination
+    attr_accessor :mutex
+
     def basedir
       @basedir ||= Dir.pwd
     end
