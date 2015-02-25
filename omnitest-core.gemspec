@@ -1,14 +1,14 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'crosstest/core/version'
+require 'omnitest/core/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'crosstest-core'
-  spec.version       = Crosstest::Core::VERSION
+  spec.name          = 'omnitest-core'
+  spec.version       = Omnitest::Core::VERSION
   spec.authors       = ['Max Lincoln']
   spec.email         = ['max@devopsy.com']
-  spec.summary       = 'Shared code for crosstest projects.'
+  spec.summary       = 'Shared code for omnitest projects.'
   spec.homepage      = ''
   spec.license       = 'MIT'
 

@@ -1,4 +1,4 @@
-module Crosstest
+module Omnitest
   module Core
     module Color
       ANSI = {
@@ -17,7 +17,7 @@ module Crosstest
       # Returns an ansi escaped string representing a color control sequence.
       #
       # @param name [Symbol] a valid color representation, taken from
-      #   Crosstest::Color::ANSI
+      #   Omnitest::Color::ANSI
       # @return [String] an ansi escaped string if the color is valid and an
       #   empty string otherwise
       def self.escape(name)
@@ -30,7 +30,7 @@ module Crosstest
       #
       # @param str [String] a string to colorize
       # @param name [Symbol] a valid color representation, taken from
-      #   Crosstest::Color::ANSI
+      #   Omnitest::Color::ANSI
       # @return [String] an ansi escaped string if the color is valid and an
       #   unescaped string otherwise
       def self.colorize(str, name)

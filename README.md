@@ -1,4 +1,4 @@
-# Crosstest::Core
+# Omnitest::Core
 
-Shared code for crosstest projects.
-See [crosstest](https://github.com/crosstest/crosstest)
+Shared code for omnitest projects.
+See [omnitest](https://github.com/omnitest/omnitest)

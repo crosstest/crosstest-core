@@ -3,7 +3,7 @@
 # Much of this code has been adapted from Fletcher Nichol (<fnichol@nichol.ca>)
 # work on test-kitchen.
 
-module Crosstest
+module Omnitest
   module Core
     # Stateless utility methods used in different contexts. Essentially a mini
     # PassiveSupport library.

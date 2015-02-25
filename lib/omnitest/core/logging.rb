@@ -1,4 +1,4 @@
-module Crosstest
+module Omnitest
   module Core
     module DefaultLogger
       module ClassMethods
@@ -7,8 +7,8 @@ module Crosstest
         end
 
         def default_logger
-          if Crosstest.respond_to? :configuration
-            Crosstest.configuration.default_logger
+          if Omnitest.respond_to? :configuration
+            Omnitest.configuration.default_logger
           else
             ::Logger.new(STDOUT)
           end

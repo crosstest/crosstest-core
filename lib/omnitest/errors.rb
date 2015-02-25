@@ -1,7 +1,7 @@
 require 'English'
 
-module Crosstest
-  # All Crosstest errors and exceptions.
+module Omnitest
+  # All Omnitest errors and exceptions.
   module Error
     # Creates an array of strings, representing a formatted exception,
     # containing backtrace and nested exception info as necessary, that can
@@ -10,7 +10,7 @@ module Crosstest
     # For example:
     #
     #     ------Exception-------
-    #     Class: Crosstest::StandardError
+    #     Class: Omnitest::StandardError
     #     Message: Failure starting the party
     #     ---Nested Exception---
     #     Class: IOError
@@ -39,7 +39,7 @@ module Crosstest
     # For example:
     #
     #     ------Exception-------
-    #     Class: Crosstest::StandardError
+    #     Class: Omnitest::StandardError
     #     Message: I have failed you
     #     ----------------------
     #
@@ -91,7 +91,7 @@ module Crosstest
     end
   end
 
-  # Base exception class from which all Crosstest exceptions derive. This class
+  # Base exception class from which all Omnitest exceptions derive. This class
   # nests an exception when this class is re-raised from a rescue block.
   class StandardError < ::StandardError
     include Error
@@ -144,34 +144,34 @@ module Crosstest
     # This is an expected failure scenario which could happen if an scenario
     # couldn't be created, a Chef run didn't successfully converge, a
     # post-convergence test suite failed, etc. In other words, you can count on
-    # encountering these failures all the time--this is Crosstest's worldview:
+    # encountering these failures all the time--this is Omnitest's worldview:
     # crash early and often. In this case a cleanly formatted exception is
     # written to `STDERR` and the exception message is written to
-    # the common Crosstest file logger.
+    # the common Omnitest file logger.
     #
     # ## Unexpected Failure
     #
-    # All other forms of `Crosstest::Error` exceptions are considered unexpected
+    # All other forms of `Omnitest::Error` exceptions are considered unexpected
     # or unplanned exceptions, typically from user configuration errors, driver
     # or provisioner coding issues or bugs, or internal code issues. Given
-    # a stable release of Crosstest and a solid set of drivers and provisioners,
+    # a stable release of Omnitest and a solid set of drivers and provisioners,
     # the most likely cause of this is user configuration error originating in
-    # the `.crosstest.yaml` setup. For this reason, the exception is written to
+    # the `.omnitest.yaml` setup. For this reason, the exception is written to
     # `STDERR`, a full formatted exception trace is written to the common
-    # Crosstest file logger, and a message is displayed on `STDERR` to the user
+    # Omnitest file logger, and a message is displayed on `STDERR` to the user
     # informing them to check the log files and check their configuration with
-    # the `crosstest diagnose` subcommand.
+    # the `omnitest diagnose` subcommand.
     #
     # @raise [SystemExit] if an exception is raised in the yielded block
     def with_friendly_errors
       yield
-    rescue Crosstest::Skeptic::ScenarioFailure => e
-      Crosstest.mutex.synchronize do
+    rescue Omnitest::Skeptic::ScenarioFailure => e
+      Omnitest.mutex.synchronize do
         handle_scenario_failure(e)
       end
       exit 10
-    rescue Crosstest::Error => e
-      Crosstest.mutex.synchronize do
+    rescue Omnitest::Error => e
+      Omnitest.mutex.synchronize do
         handle_error(e)
       end
       exit 20
@@ -180,7 +180,7 @@ module Crosstest
     # Handles an scenario failure exception.
     #
     # @param e [StandardError] an exception to handle
-    # @see Crosstest.with_friendly_errors
+    # @see Omnitest.with_friendly_errors
     # @api private
     def handle_scenario_failure(e)
       stderr_log(e.message.split(/\s{2,}/))
@@ -194,19 +194,19 @@ module Crosstest
     # Handles an unexpected failure exception.
     #
     # @param e [StandardError] an exception to handle
-    # @see Crosstest.with_friendly_errors
+    # @see Omnitest.with_friendly_errors
     # @api private
     def handle_error(e)
       stderr_log(Error.formatted_exception(e))
-      stderr_log('Please see .crosstest/logs/crosstest.log for more details')
-      # stderr_log("Also try running `crosstest diagnose --all` for configuration\n")
+      stderr_log('Please see .omnitest/logs/omnitest.log for more details')
+      # stderr_log("Also try running `omnitest diagnose --all` for configuration\n")
       file_log(:error, Error.formatted_trace(e))
     end
 
     private
 
-    # Writes an array of lines to the common Crosstest logger's file device at the
-    # given severity level. If the Crosstest logger is set to debug severity, then
+    # Writes an array of lines to the common Omnitest logger's file device at the
+    # given severity level. If the Omnitest logger is set to debug severity, then
     # the array of lines will also be written to the console output.
     #
     # @param level [Symbol,String] the desired log level
@@ -214,10 +214,10 @@ module Crosstest
     # @api private
     def file_log(level, lines)
       Array(lines).each do |line|
-        if Crosstest.logger.debug?
-          Crosstest.logger.debug(line)
+        if Omnitest.logger.debug?
+          Omnitest.logger.debug(line)
         else
-          Crosstest.logger.logdev && Crosstest.logger.logdev.public_send(level, line)
+          Omnitest.logger.logdev && Omnitest.logger.logdev.public_send(level, line)
         end
       end
     end
@@ -232,13 +232,13 @@ module Crosstest
       end
     end
 
-    # Writes an array of lines to the common Crosstest debugger with debug
+    # Writes an array of lines to the common Omnitest debugger with debug
     # severity.
     #
     # @param lines [Array<String>] an array of strings to log
     # @api private
     def debug_log(lines)
-      Array(lines).each { |line| Crosstest.logger.debug(line) }
+      Array(lines).each { |line| Omnitest.logger.debug(line) }
     end
   end
 end

@@ -1,13 +1,13 @@
-module Crosstest
+module Omnitest
   module Core
     module Configurable
-      # @see Crosstest::Configuration
+      # @see Omnitest::Configuration
       def configuration
         fail "configuration doesn't take a block, use configure" if block_given?
         @configuration ||= const_get('Configuration').new
       end
 
-      # @see Crosstest::Configuration
+      # @see Omnitest::Configuration
       def configure
         yield(configuration)
       end

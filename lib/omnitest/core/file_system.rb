@@ -1,4 +1,4 @@
-module Crosstest
+module Omnitest
   module Core
     module FileSystem
       include Util::String

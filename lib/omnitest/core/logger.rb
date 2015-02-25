@@ -1,6 +1,6 @@
 require 'logger'
 
-module Crosstest
+module Omnitest
   module Core
     module Logger
       def logger
@@ -20,8 +20,8 @@ module Crosstest
       # @return [StdoutLogger] a new logger
       # @api private
       def stdout_logger(stdout, color = nil)
-        logger = Crosstest::Core::StdoutLogger.new(stdout)
-        # if Crosstest.tty?
+        logger = Omnitest::Core::StdoutLogger.new(stdout)
+        # if Omnitest.tty?
         if stdout.tty? && color
           logger.formatter = proc do |_severity, _datetime, _progname, msg|
             Core::Color.colorize("#{msg}", color).concat("\n")

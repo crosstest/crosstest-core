@@ -1,13 +1,13 @@
 require 'hashie'
 require 'erb'
 
-module Crosstest
+module Omnitest
   module Core
     class Dash < Hashie::Dash
       include Hashie::Extensions::Coercion
 
       def initialize(hash = {})
-        super Crosstest::Core::Util.symbolized_hash(hash)
+        super Omnitest::Core::Util.symbolized_hash(hash)
       end
 
       # @api private

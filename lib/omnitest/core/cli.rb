@@ -1,7 +1,7 @@
 require 'English'
 require 'thor'
 
-module Crosstest
+module Omnitest
   module Core
     class CLI < Thor
       # Common module to load and invoke a CLI-implementation agnostic command.
@@ -18,7 +18,7 @@ module Crosstest
         # @param additional_options [Hash] additional configuration needed to
         #   set up the command class (default: `{}`)
         def perform(task, command, args = nil, additional_options = {})
-          require "crosstest/command/#{command}"
+          require "omnitest/command/#{command}"
 
           command_options = {
             help: -> { help(task) },
@@ -27,7 +27,7 @@ module Crosstest
           }.merge(additional_options)
 
           str_const = Thor::Util.camel_case(command)
-          klass = ::Crosstest::Command.const_get(str_const)
+          klass = ::Omnitest::Command.const_get(str_const)
           klass.new(task, args, options, command_options).call
         end
       end
