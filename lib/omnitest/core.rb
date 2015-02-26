@@ -1,4 +1,5 @@
 require 'omnitest/core/version'
+require 'forwardable'
 require 'logger'
 require 'cause'
 require 'thor'
